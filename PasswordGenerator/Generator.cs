@@ -103,58 +103,37 @@ namespace PasswordGenerator
 
         private static int[] GetPercentages(int[] options, int length)
         {
-            int numOptions = 0;
-            int[] arr = new int[4];
-
-            foreach (int option in options)
-            {
-                if (option == 1)
-                    numOptions++;
-                else
-                    arr[option] = -1;
-            }
-
             Random random = SeedRandom();
-            int remainingLength = length;
-            int[] percentages = new int[numOptions];
+
+            int[] percentages = new int[options.Length];
+            int[] arr = new int[options.Length];
+
+            int numOptions = options.Sum();
+
+            int sum = 0;
 
             for (int i = 0; i < numOptions - 1; i++)
             {
-                int randomPercentage = random.Next(1, remainingLength);
-                percentages[i] = randomPercentage;
-                remainingLength -= randomPercentage;
-
-                if (remainingLength == 0)
-                    break;
+                arr[i] = random.Next(1, length - (numOptions - i - 1) - sum);
+                sum += arr[i];
             }
 
-            percentages[numOptions - 1] = remainingLength;
+            arr[numOptions - 1] = length - sum;
 
-
-            int j = 0;
-            for (int i = 0; i < numOptions; i++)
+            for (int i = 0; i < options.Length; i++)
             {
-
-                if (j !> percentages.Length && percentages[j] == 0)
+                if (options[i] == 1)
                 {
-                    int index = Array.IndexOf(percentages, percentages.Max());
-
-                    percentages[index] -= 1;
-
-                    percentages[i] = 1;
+                    percentages[i] = arr[0];
+                    arr = arr.Skip(1).ToArray();
                 }
-
-                if (arr[i] == 0)
+                else
                 {
-                    arr[i] = percentages[j];
-                    j++;
+                    percentages[i] = 0;
                 }
             }
 
-            if (arr[0] == 11)
-                return GetPercentages(options, length);
-            else
-                return arr;
+            return percentages;
         }
 
         private static string Shuffle(string password, Random r)

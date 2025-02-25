@@ -12,11 +12,19 @@ namespace GeneratorTesting
         {
             int[] t = new int[] { 1, 1, 0, 1 };
 
-            int[] arr = GetPercentages(t, 18);
-
-            for(int i = 0; i < arr.Length; i++)
+            while (true)
             {
-                Console.WriteLine(arr[i]);
+
+                int[] arr = GetPercentages(t, 18);
+
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    Console.WriteLine(arr[i]);
+                }
+
+                Console.WriteLine();
+
+                while (Console.ReadKey().Key != ConsoleKey.Enter) { }
             }
         }
 
@@ -85,6 +93,7 @@ namespace GeneratorTesting
             Random random = SeedRandom();
 
             int[] percentages = new int[options.Length];
+            int[] arr = new int[options.Length];
 
             int numOptions = options.Sum();
 
@@ -92,18 +101,24 @@ namespace GeneratorTesting
 
             for(int i = 0; i < numOptions - 1; i++)
             {
-                if (options[i] == 0)
-                {
-                    numOptions++;
-                    percentages[i] = 0;
-                    continue;
-                }
-
-                percentages[i] = random.Next(1, length - (numOptions - i - 1) - sum);
-                sum += percentages[i];
+                arr[i] = random.Next(1, length - (numOptions - i - 1) - sum);
+                sum += arr[i];
             }
 
-            percentages[numOptions - 1] = length - sum;
+            arr[numOptions - 1] = length - sum;
+
+            for(int i = 0; i < options.Length; i++)
+            {
+                if (options[i] == 1)
+                {
+                    percentages[i] = arr[0];
+                    arr = arr.Skip(1).ToArray();
+                }
+                else
+                {
+                    percentages[i] = 0;
+                }
+            }
             
             return percentages;
         }

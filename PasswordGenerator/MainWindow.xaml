@@ -19,6 +19,8 @@
 
             <Label x:Name="lblPassword" Content="Password" HorizontalAlignment="Center" Margin="0,132,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" Visibility="Hidden" FontFamily="CommitMono"/>
             <TextBox x:Name="txtPassword" HorizontalAlignment="Center" Height="24" Margin="0,184,0,0" TextWrapping="Wrap" Text="" BorderThickness="0" VerticalAlignment="Top" Width="208" FontSize="16" Background="#FFA49B9B" Visibility="Hidden" FontFamily="CommitMono" Focusable="False" IsEnabled="False"/>
+            <Button x:Name="btnCopy" FontWeight="Bold" Content="Copy to Clipboard" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="140" Height="23" Click="btnCopy_Click" Background="#FFA49B9B" Visibility="Hidden" FontFamily="CommitMono" TabIndex="6"/>
+            <Button x:Name="btnBack" FontWeight="Bold" Content="Back" HorizontalAlignment="Center" Margin="0,260,0,0" VerticalAlignment="Top" Width="74" Height="23" Click="btnBack_Click" Background="#FFA49B9B" Visibility="Hidden" FontFamily="CommitMono" TabIndex="6"/>
 
         </Grid>
     </Border>

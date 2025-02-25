@@ -51,6 +51,8 @@ namespace PasswordGenerator
         {
             lblPassword.Visibility = Visibility.Visible;
             txtPassword.Visibility = Visibility.Visible;
+            btnCopy.Visibility = Visibility.Visible;
+            btnBack.Visibility = Visibility.Visible;
             btnGenerate.Visibility = Visibility.Hidden;
             lblPasswordLength.Visibility = Visibility.Hidden;
             txtPasswordLength.Visibility = Visibility.Hidden;
@@ -58,6 +60,30 @@ namespace PasswordGenerator
             chkUpperCase.Visibility = Visibility.Hidden;
             chkLowerCase.Visibility = Visibility.Hidden;
             chkNumbers.Visibility = Visibility.Hidden;
+        }
+
+        private void ShowOptions()
+        {
+            lblPassword.Visibility = Visibility.Hidden;
+            txtPassword.Visibility = Visibility.Hidden;
+            btnCopy.Visibility = Visibility.Hidden;
+            btnBack.Visibility = Visibility.Hidden;
+            btnGenerate.Visibility = Visibility.Visible;
+            lblPasswordLength.Visibility = Visibility.Visible;
+            txtPasswordLength.Visibility = Visibility.Visible;
+            chkSpecialCharacters.Visibility = Visibility.Visible;
+            chkUpperCase.Visibility = Visibility.Visible;
+            chkLowerCase.Visibility = Visibility.Visible;
+            chkNumbers.Visibility = Visibility.Visible;
+
+            txtPassword.Text = "";
+            txtPassword.Width = 100;
+
+            txtPasswordLength.Text = "";
+            chkSpecialCharacters.IsChecked = false;
+            chkUpperCase.IsChecked = false;
+            chkLowerCase.IsChecked = false;
+            chkNumbers.IsChecked = false;
         }
 
         private int[] GetNumOptions()
@@ -77,6 +103,17 @@ namespace PasswordGenerator
                 numOptions[3] = 1;
 
             return numOptions;
+        }
+
+        private void btnCopy_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(txtPassword.Text);
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            ShowOptions();
+            Clipboard.Clear();
         }
     }
 }
